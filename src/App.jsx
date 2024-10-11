@@ -1,11 +1,25 @@
 import React, { useState } from 'react';
-import { ComentarioItem } from './componentes/ComentarioItem';
 import Header from './componentes/Header';
 import comentarios from './data/Comentarios';
+import Card from './componentes/Card';
+import ComentarioLista from './componentes/ComentarioLista';
+import ComentarioStats from './componentes/ComentarioStats';
+import ComentarioForm from './componentes/ComentarioForm';
 
 function App() {
 
-    const [comments, setCommments] = useState(comentarios)
+    const [comments,
+         setCommments] = useState(comentarios)
+
+    
+    const borrarItem = (id) => {
+        if(
+        window.confirm("Está seguro de borrar el comentario?")){
+                console.log("App", id)
+
+                setCommments(comments.filter((c)=> c.id !== id))
+        }
+    }
 
     const titulo="App de comentarios"
     const Autor ="Miguel Angel Ortiz Neira"
@@ -19,25 +33,16 @@ function App() {
   return (
     <div
      className='container'>
-        <Header titulo={titulo} autor={Autor} ficha={Ficha} centrof={CentroF}/>
-        {showComments ? 
-            (
-            <div className='comments'>
-                <h3>Comentarios: {comentarios.length} </h3>
-                <ul>
-                    {
-                        comments.map(comentario => 
-                            <ComentarioItem 
-                            key={comentario.id}
-                            calificacion={comentario.calificacion}
-                            comentario={comentario.comentario}
-                            />
-                        )
-                    }
-                </ul>
-            </div>
-            )
-        : 'no hay comentarios'}
+        <Header titulo={titulo} autor={Autor} ficha={Ficha} centrof={CentroF}
+        />
+        <ComentarioForm/>
+        <ComentarioStats comentarios={comments}/>
+        <ComentarioLista comments={comments} 
+        handleDelete={borrarItem}
+        />
+        <Card>
+            <p>Holaaa</p>
+        </Card>
     </div>
   )
 }
