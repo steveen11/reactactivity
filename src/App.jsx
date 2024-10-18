@@ -30,12 +30,16 @@ function App() {
     const showComments = true;
     if(loading === true) return ( <h1> Cargando comentarios...</h1> )
 
+    const addComentario = (newComentario) =>{
+        setCommments(prevComments=>[...prevComments, newComentario])
+    }
+
   return (
     <div
      className='container'>
         <Header titulo={titulo} autor={Autor} ficha={Ficha} centrof={CentroF}
         />
-        <ComentarioForm/>
+        <ComentarioForm handleAdd={addComentario}/>
         <ComentarioStats comentarios={comments}/>
         <ComentarioLista comments={comments} 
         handleDelete={borrarItem}
