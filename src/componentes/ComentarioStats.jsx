@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import ComentariosContexto from '../contexto/comentarioContexto';
 
 const ComentarioStats = ({ comentarios }) => {
-    const totalComentarios = comentarios.length;
+
+    const {comments} = useContext(ComentariosContexto)
+
+    const totalComentarios = comments.length;
     
-    const promedio = totalComentarios > 0 ? comentarios.reduce((acc, comentario) => acc + comentario.calificacion, 0) / totalComentarios : 0;
+    const promedio = totalComentarios > 0 ? comments.reduce((acc, comentario) => acc + comentario.calificacion, 0) / totalComentarios : 0;
 
     return (
         <div>

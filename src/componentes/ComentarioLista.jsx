@@ -1,6 +1,18 @@
+import {React, useContext} from 'react'
 import { ComentarioItem } from './ComentarioItem'
+import { AnimatePresence, motion } from 'framer-motion'
+import ComentariosContexto from '../contexto/comentarioContexto'
 
-function ComentarioLista ({comments, handleDelete}){
+ export const MyComponent = () => (
+   <motion.button
+     whileHover={{ scale: 1.1 }}
+     whileTap={{ scale: 0.9 }}
+   />
+ )
+
+function ComentarioLista (){
+
+    const {comments} = useContext(ComentariosContexto)
 
     if(comments.length === 0 || !comments){
         return <p>No hay comentario</p>
@@ -10,21 +22,23 @@ function ComentarioLista ({comments, handleDelete}){
 
 
 return (
+    <AnimatePresence>
     <div className='comments'>
     <ul>
         {
-            comments.map(comentario => 
+            comments.map(comentario =>
+                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.8 }}>
                 <ComentarioItem 
-                key={comentario.id}
-                calificacion={comentario.calificacion}
-                comentario={comentario.comentario}
-                id={comentario.id}
-                handleDelete={handleDelete}
+                key={comments.id}
+                comentario={comments}
+
                 />
+                </motion.div>
             )
         }
     </ul>
 </div>
+</AnimatePresence>
   )
 }
     }

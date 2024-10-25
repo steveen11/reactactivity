@@ -1,28 +1,21 @@
 import React, { useState } from 'react';
 import Header from './componentes/Header';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import comentarios from './data/Comentarios';
-import Card from './componentes/Card';
 import ComentarioLista from './componentes/ComentarioLista';
 import ComentarioStats from './componentes/ComentarioStats';
 import ComentarioForm from './componentes/ComentarioForm';
-
+import About from './paginas/About';
+import AboutIconLink from './componentes/AboutIconLink';
+import AboutIndexLink from './componentes/AboutIndexLink';
+import {ComentariosProvider} from './contexto/comentarioContexto'
 function App() {
 
     const [comments,
          setCommments] = useState(comentarios)
 
-    
-    const borrarItem = (id) => {
-        if(
-        window.confirm("Está seguro de borrar el comentario?")){
-                console.log("App", id)
-
-                setCommments(comments.filter((c)=> c.id !== id))
-        }
-    }
-
     const titulo="App de comentarios"
-    const Autor ="Miguel Angel Ortiz Neira"
+    const Autor ="Samuel Steven Ardila"
     const Ficha = 2902093
     const CentroF = "SENA CGMLTI"
 
@@ -35,19 +28,33 @@ function App() {
     }
 
   return (
+    <ComentariosProvider>
+    <Router>
     <div
      className='container'>
         <Header titulo={titulo} autor={Autor} ficha={Ficha} centrof={CentroF}
         />
-        <ComentarioForm handleAdd={addComentario}/>
-        <ComentarioStats comentarios={comments}/>
-        <ComentarioLista comments={comments} 
-        handleDelete={borrarItem}
-        />
-        <Card>
-            <p>Holaaa</p>
-        </Card>
+        <Routes>
+          <Route exact path='/' element={
+            <>
+             <ComentarioForm handleAdd={addComentario}/>
+             <ComentarioStats/>
+             <ComentarioLista/>
+              <AboutIconLink/>
+            </>
+          }></Route>
+          <Route exact path='/About' element={
+            <>
+              <About titulo={titulo} autor={Autor} ficha={Ficha}
+              />
+              <AboutIndexLink/>
+            </>
+            }>
+            </Route>
+        </Routes>
     </div>
+    </Router>
+    </ComentariosProvider>
   )
 }
 
