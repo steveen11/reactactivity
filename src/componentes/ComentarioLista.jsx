@@ -27,10 +27,12 @@ return (
     <ul>
         {
             comments.map(comentario =>
-                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.8 }}>
+                <motion.div key={comentario.id}
+                whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.8 }}>
                 <ComentarioItem 
-                key={comments.id}
-                comentario={comments}
+                key={comentario.id}
+                comentario={comentario.comentario}   
+                calificacion={comentario.calificacion}
 
                 />
                 </motion.div>

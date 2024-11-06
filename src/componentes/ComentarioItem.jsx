@@ -3,7 +3,7 @@ import Card from './Card'
 import { FaTimes } from 'react-icons/fa';
 import ComentariosContexto from '../contexto/comentarioContexto'; 
 
-export function ComentarioItem ({comentario}){
+export function ComentarioItem ({comentario, calificacion}){
 
     //desestructuar: tomar objeto y separar sus atributos
 
@@ -12,11 +12,11 @@ export function ComentarioItem ({comentario}){
     const [identificacion, setIdentificacion] = useState(comentario.id)
 
   return (
-    <Card reverse={true}>
-      <div className='num-display'>{rating}</div>
+    <Card reverse={false}>
+      <div className='num-display'>{calificacion}</div>
+      <div className='text-display'>{ comentario }</div>
             <button className='close'>
-      <FaTimes color='green'/>
-      <div className='text-display'>{ comment }</div>
+      <FaTimes color='black'/>
       </button>
     </Card>
   )

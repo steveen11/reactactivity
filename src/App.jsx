@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import  React  from 'react';
 import Header from './componentes/Header';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import comentarios from './data/Comentarios';
-import ComentarioLista from './componentes/ComentarioLista';
+import ComentarioLista from './componentes/Comentariolista';
 import ComentarioStats from './componentes/ComentarioStats';
 import ComentarioForm from './componentes/ComentarioForm';
 import About from './paginas/About';
@@ -11,21 +10,15 @@ import AboutIndexLink from './componentes/AboutIndexLink';
 import {ComentariosProvider} from './contexto/comentarioContexto'
 function App() {
 
-    const [comments,
-         setCommments] = useState(comentarios)
-
     const titulo="App de comentarios"
     const Autor ="Samuel Steven Ardila"
     const Ficha = 2902093
     const CentroF = "SENA CGMLTI"
 
     const loading = false;
-    const showComments = true;
     if(loading === true) return ( <h1> Cargando comentarios...</h1> )
 
-    const addComentario = (newComentario) =>{
-        setCommments(prevComments=>[...prevComments, newComentario])
-    }
+
 
   return (
     <ComentariosProvider>
@@ -37,7 +30,7 @@ function App() {
         <Routes>
           <Route exact path='/' element={
             <>
-             <ComentarioForm handleAdd={addComentario}/>
+             <ComentarioForm />
              <ComentarioStats/>
              <ComentarioLista/>
               <AboutIconLink/>

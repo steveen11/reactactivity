@@ -32,7 +32,7 @@ const ComentarioForm = ({handleAdd}) => {
             value={text}
             onChange={handleTextChange}
             placeholder="Ingrese su comentario aqui"/>
-            <button type="submit">
+            <button className= 'input-group' type="submit">
                 Guardar
             </button>
         </div>

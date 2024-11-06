@@ -1,16 +1,20 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 const ComentariosContexto = createContext()
 //Crear provider: para que el contexto se reconozca en todo componente
 export const ComentariosProvider = ({children}) => {
 
-    const [comments, setCommments] = useState([
-        {
-            id: 1,
-            comentario: "Este es el comentario 1",
-            calificacion: 3
-        }
-    ])
+    const [comments, setCommments] = useState([]);
+    
+    useEffect(()=>{
+        fetchComentarios()
+    }, [])
+
+    const fetchComentarios = async () => {
+        const response = await fetch('http://localhost:5000/comentarios')
+        const comentariosAPI = await response.json()
+        setCommments(comentariosAPI)
+    }
 
     const borrarItem = (id) => {
         if(
