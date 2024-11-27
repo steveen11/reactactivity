@@ -12,25 +12,25 @@ import ComentariosContexto from '../contexto/comentarioContexto'
 
 function ComentarioLista (){
 
-    const {comments} = useContext(ComentariosContexto)
+    const {comments, isLoading} = useContext(ComentariosContexto)
 
-    if(comments.length === 0 || !comments){
+    if(!isLoading && comments.length === 0 || !comments){
         return <p>No hay comentario</p>
     }else{
 
 
 
 
-return (
+return isLoading?(<h2>cargando...</h2>):(
     <AnimatePresence>
     <div className='comments'>
     <ul>
         {
             comments.map(comentario =>
                 <motion.div key={comentario.id}
-                whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.8 }}>
+                >
                 <ComentarioItem 
-                key={comentario.id}
+                id={comentario.id}
                 comentario={comentario.comentario}   
                 calificacion={comentario.calificacion}
 
